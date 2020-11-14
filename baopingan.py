@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 from openpyxl import load_workbook
 
 
+# 自行修改info.xlsx文件路径
+
+
 # 从excel文件中读取数据
 def get_info():
     username = []
