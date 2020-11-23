@@ -12,7 +12,7 @@
 
 #### 使用方法：
 
-1. 安装依赖包：pip install -r requirements_sel.txt
+1. 安装依赖包：pip install -r requirements.txt
 2. 下载你的chrome浏览器相同版本chromedriver驱动，chrome版本自己在浏览器中查看，下载地址：http://npm.taobao.org/mirrors/chromedriver/
 3. 将chromedriver.exe放置在python的Scripts路径下
 4. 改info.xlsx的绝对路径
@@ -26,6 +26,6 @@
 
 #### 使用方法：
 
-1. 安装依赖包：pip install -r requirements_sel.txt
+1. 安装依赖包：pip install -r requirements.txt
 2. 改info.xlsx的绝对路径
 
