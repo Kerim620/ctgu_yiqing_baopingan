@@ -22,7 +22,7 @@
 
       ![image-20210814175714071](https://gitee.com/zzzjoy/My_Pictures/raw/master/image-20210814175714071.png)
 
-   * 部署函数代码，新建文件config.json配置文件，复制index.py内容和config.json内容，更改config文件内容，配置如下。其中消息推送渠道只有pushplus，请自行上[pushplus官网](https://pushplus.hxtrip.com/message)注册，获取token。
+   * 部署函数代码，新建文件config.json配置文件，复制[index.py](https://github.com/zzzjoy-620/ctgu_yiqing_baopingan/blob/main/baopingan_yunhanshu/index.py)内容和[config.json](https://github.com/zzzjoy-620/ctgu_yiqing_baopingan/blob/main/baopingan_yunhanshu/config.json)内容，更改config.json文件内容，配置如下。其中消息推送渠道只有pushplus，请自行上[pushplus官网](https://pushplus.hxtrip.com/message)注册，获取token。
 
       ```
       config参数说明
