@@ -118,7 +118,7 @@ def main():
 
     total = len(users)
     finished = 0
-    detail_msg = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+'\n'
+    detail_msg = ''
     start_time = time.time()
     for i in range(total):
         # 报一个等待时间
@@ -131,7 +131,7 @@ def main():
             logger.info(e)
             s.close()
             logger.info(str(users[i][0]) + ':登录超时')
-            detail_msg += str(users[i][0]) + ':登录超时\n'
+            detail_msg += str(users[i][0]) + ':登录超时<br>'
             if len(users[i]) == 3 and users[i][2] != '':
                 push_msg('自动上报平安失败，登录超时', users[i][2])
             continue
@@ -146,21 +146,21 @@ def main():
                 s.close()
                 finished += 1
                 logger.info(str(users[i][0]) + ':今日已上报')
-                detail_msg += str(users[i][0]) + ':今日已上报\n'
+                detail_msg += str(users[i][0]) + ':今日已上报<br>'
                 continue
             # 上报成功
             if sent_info(s, data, headers):
                 logout(s, headers)
                 s.close()
                 logger.info(str(users[i][0]) + ':上报成功')
-                detail_msg += str(users[i][0]) + ':上报成功\n'
+                detail_msg += str(users[i][0]) + ':上报成功<br>'
                 finished += 1
             # 上报失败
             else:
                 logout(s, headers)
                 s.close()
                 logger.info(str(users[i][0]) + ':上报失败')
-                detail_msg += str(users[i][0]) + ':上报失败\n'
+                detail_msg += str(users[i][0]) + ':上报失败<br>'
                 if len(users[i]) == 3 and users[i][2] != '':
                     push_msg('自动上报平安失败，服务异常', users[i][2])
                 continue
@@ -168,21 +168,27 @@ def main():
         else:
             s.close()
             logger.info(str(users[i][0]) + ':密码错误，登录失败')
-            detail_msg += str(users[i][0]) + ':密码错误\n'
+            detail_msg += str(users[i][0]) + ':密码错误<br>'
             if len(users[i]) == 3 and users[i][2] != '':
                 push_msg('自动上报平安失败，请检查密码', users[i][2])
             continue
 
     endtime = time.time()
     usedtime = "%.3f" % (endtime - start_time)
-    nowtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
+    # 注意，这里云函数时间不是北京时间，需要加8小时
+    nowtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time() + 28800))
+    # nowtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
     logger.info(nowtime+'  应报:'+str(total)+' 实报:'+str(finished)+' 用时:'+usedtime)
+
+    detail_msg = nowtime+'<br>应报:'+str(total)+' 实报:'+str(finished)+' 用时:'+usedtime+'<br>'+detail_msg
 
     # 根据推送等级推送
     if push_level == 1:
         push_msg(detail_msg, pushplus_token)
     elif push_level == 2:
-        push_msg(nowtime+'\n应报:'+str(total)+' 实报:'+str(finished)+' 用时:'+usedtime, pushplus_token)
+        push_msg(nowtime+'<br>应报:'+str(total)+' 实报:'+str(finished)+' 用时:'+usedtime, pushplus_token)
     elif push_level == 3:
         if total != finished:
             push_msg(detail_msg, pushplus_token)
@@ -195,9 +201,9 @@ def main():
 
 
 def main_handler(event, content):
+    logger.info('-'*20+'日志分界线'+'-'*20)
     main()
+    logger.info('-'*20+'日志分界线'+'-'*20)
 
 
-main()
-
-
+# main()

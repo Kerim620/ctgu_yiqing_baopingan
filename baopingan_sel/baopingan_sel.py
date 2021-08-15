@@ -1,6 +1,5 @@
 import time
 from selenium import webdriver
-import datetime
 from openpyxl import load_workbook
 
 def get_info():
@@ -47,7 +46,7 @@ def bao(username, password):
         if len(s) != 0:
             print('该用户是班委')
             driver.find_element_by_id('menu_my').click() #点击我的按钮
-            time.sleep(1)                
+            time.sleep(3)                
             driver.find_element_by_id('change_btn').click()#点击切换角色
             time.sleep(1)
             driver.find_element_by_xpath('/html/body/main/div[2]/section/form/div/div/div/div/label[2]').click()#点击学生
@@ -79,10 +78,10 @@ def bao(username, password):
     print('\n*****应报'+str(sum)+'人'+'实报'+str(finshed)+'人'+'请查收！*****')
  
 def main():
-    nowtime = datetime.datetime.now().strftime('%m-%d')#获取当前时间
-    print('今天是'+nowtime)
+    print('开始时间'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     username, password = get_info()
     bao(username, password)
+    print('结束时间'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
 if __name__ == "__main__":
     main()
