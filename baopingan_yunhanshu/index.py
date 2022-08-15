@@ -89,20 +89,18 @@ def sent_info(s, data, headers):
 def push_msg(msg, token):
     token = token
     if token != '':
-        pushplus_url = 'http://pushplus.hxtrip.com/send'
+        pushplus_url = 'http://www.pushplus.plus/send'
         data = {
             'token': token,
             'title': '每日报平安通知',
-            'content': msg,
-            'template': 'html'
+            'content': time.strftime("%m-%d %H:%M:%S", time.localtime(time.time() + 28800)) + '\n' + msg
         }
         r = requests.post(url=pushplus_url, data=data)
-        result = re.findall(r'<code>([0-9]{3})</code>', r.text)
-        if result[0] == '200':
-            logger.info('消息推送成功')
+        result = json.loads(r.text)
+        if result['code'] == 200:
+            logger.info('消息推送成功：' + msg)
         else:
-            logger.info('消息推送失败')
-
+            logger.info('消息推送失败：' + msg)
 
 def main():
     headers = {
