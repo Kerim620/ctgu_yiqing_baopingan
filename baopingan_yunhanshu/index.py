@@ -57,7 +57,8 @@ def student_info_parse(html):
         'sfzy': '否',
         'sfgl': '否',
         'status': re.findall(r'name="status" id="status" value="(.*?)"/>', html)[0],
-        'szdz': re.findall(r'name="szdz"  maxlength="20" value="(.*?)" readonly>', html)[0],  # 所在地区
+#         'szdz': re.findall(r'name="szdz"  maxlength="20" value="(.*?)" readonly>', html)[0],  # 所在地区
+        'szdz': '西陵区'  # 所在地区直接写死
         'sjh': re.findall(r'name="sjh" maxlength="20" value="(.*?)">', html)[0],  # 手机号
         'lxrxm': re.findall(r'name="lxrxm" maxlength="40" value="(.*?)"', html)[0],  # 紧急联系人姓名
         'lxrsjh': re.findall(r'name="lxrsjh" maxlength="40" value="(.*?)"', html)[0],  # 紧急联系人电话
