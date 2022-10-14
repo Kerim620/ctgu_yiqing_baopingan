@@ -7,6 +7,10 @@
 
 使用腾讯云函数可每天自动上报，每天可以收到上报通知。
 
+### 2022.10.14公告
+
+学校暂时限制了访问IP，只有湖北地区才能访问报平安系统，所以云函数云服务器暂时不可用。有能力的同学可以copy代码到本地，手动打开电脑运行。
+
 #### 使用方法：
 1. 点此[注册腾讯云函数](https://console.cloud.tencent.com/)。
 2. 点此[新建云函数](https://console.cloud.tencent.com/scf/list-create?rid=4&ns=default&keyword=helloworld%20%E7%A9%BA%E7%99%BD%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%26python3)，配置都不用管。
